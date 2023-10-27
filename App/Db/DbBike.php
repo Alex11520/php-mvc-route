@@ -48,11 +48,13 @@ class DbBike extends Db
         return new Bike($row['bike_id'], $row['bike_name'], $row['bike_price']);
     }
 
-    public function updateBikePrice($bike_name, $bike_price): Bike
+    public function updateBikePrice($bike_id, $bike_price): Bike
     {
-        $sql = "UPDATE bike SET bike_price = '$bike_price' WHERE bike_name = '$bike_name'";
-        $result = $this->conn->query($sql);
+        $sql = "UPDATE bike SET bike_price = '$bike_price' WHERE bike_id = '$bike_id'";
+        $this->conn->query($sql);
+        $result = $this->conn->query("SELECT * FROM bike WHERE bike_id='$bike_id'");
         $row = $result->fetch_assoc();
+
         return new Bike($row['bike_id'], $row['bike_name'], $row['bike_price']);
     }
 }

@@ -56,10 +56,12 @@ class BikeController
     }
     public function Put(): void
     {
-        $bike_id = $_PUT['bike_id'];
-        $bike_price = $_PUT['bike_price'];
+        $bike_id = $_GET['bike_id'];
+        $bike_price = $_GET['bike_price'];
         $bike = $this->db->updateBikePrice($bike_id, $bike_price);
-        require_once(__DIR__ . "/../View/BikePutView.php");
+        $body=json_encode($bike);
+        header('Content-Type: application/json; charset=utf-8');
+        echo $body;
     }
 
 }
