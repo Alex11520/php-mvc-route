@@ -1,0 +1,26 @@
+version: "3.9"
+services:
+  php-apache:
+    ports:
+      - "80:80"
+    build: apache.Dockerfile
+    volumes:
+      - ./App:/var/www/App
+      - ./public:/var/www/html
+      - ./logs:/var/www/logs
+      - ./vendor:/var/www/vendor
+  mysql:
+    ports:
+      - "3306:3306"
+    build: mysql.Dockerfile
+    environment:
+      MYSQL_ROOT_PASSWORD: "12345"
+      MYSQL_USER: "admin"
+      MYSQL_PASSWORD: "12345"
+      MYSQL_DATABASE: "product"
+    volumes:
+      - dbData:/var/lib/mysql
+volumes:
+#  at2:
+  public:
+  dbData:
