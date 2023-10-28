@@ -11,10 +11,7 @@
         <button type="submit">submit</button>
     </form>
 </div>
-<ul>
-    <li><p id="name"></p></li>
-    <li><p id="price"></p></li>
-</ul>
+
 <script>
     document.getElementById("bikeUpdateForm").addEventListener("submit", (e) => {
         e.preventDefault();
@@ -29,8 +26,11 @@
         }).then((r) => {
             r.json().then((v) => {
                 // display data
-                document.getElementById("name").innerText = v['bike_name'];
-                document.getElementById("price").innerText = v['bike_price'];
+                // document.getElementById("name").innerText = v['bike_name'];
+                // document.getElementById("price").innerText = v['bike_price'];
+                let bikeName = encodeURIComponent(v['bike_name']);
+                let updatedPrice = encodeURIComponent(v['bike_price']);
+                window.location.href = `/View/BikePutView?bike_name=${bikeName}&bike_price=${updatedPrice}`;
             })
         }).catch((err) => {
             console.error(err)

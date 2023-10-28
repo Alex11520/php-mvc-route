@@ -6,4 +6,5 @@
     <li><a href="/crud/bike/read">Read</a></li>
     <li><a href="/crud/bike/update">Update</a></li>
     <li><a href="/crud/bike/remove">Delete</a></li>
+    <li><a href="/crud/bike/display">Show All Bikes</a></li>
 </ul>

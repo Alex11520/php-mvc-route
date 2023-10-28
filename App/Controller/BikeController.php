@@ -63,5 +63,18 @@ class BikeController
         header('Content-Type: application/json; charset=utf-8');
         echo $body;
     }
+    public function Remove(): void
+    {
+        require_once (__DIR__ . "/../View/BikeRemoveView.php");
+    }
+    public function Delete(): void
+    {
+        $bike_id = $_GET['bike_id'];
+        $this->db->deleteBike($bike_id);
+    }
 
+    public function Display(): void
+    {
+        $this->db->showAllBikes();
+    }
 }

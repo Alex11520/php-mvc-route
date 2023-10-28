@@ -37,7 +37,8 @@ $router->get('/', [HomeController::class, 'get'])
     ->post('/crud/bike/post', [BikeController::class, 'post'])
     ->get('/crud/bike/get', [BikeController::class, 'get'])
     ->put('/crud/bike/put', [BikeController::class, 'put'])
-    ->delete('/crud/bike/delete', [BikeController::class, 'delete'])
+    ->delete('/crud/bike/delete',[BikeController::class, 'delete'])
+    ->get('/crud/bike/display', [BikeController::class, 'display'])
     ->get('/View/BikePutView', function() {
         require_once(__DIR__ . '/../App/View/BikePutView.php');
     });
