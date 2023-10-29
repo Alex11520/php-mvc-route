@@ -4,6 +4,8 @@
 namespace App\Route;
 
 // Declare the Router class
+use Exception;
+
 class Router
 {
     // Private property to hold the registered routes
@@ -36,6 +38,10 @@ class Router
     }
 
     // Method to resolve the incoming request and execute the appropriate action
+
+    /**
+     * @throws Exception
+     */
     public function resolve(string $reqUri, string $requestMethod)
     {
         // Extract the base route from the request URI (ignoring query string)
@@ -44,9 +50,10 @@ class Router
         // Look for an action corresponding to the route and request method
         $action = $this->routes[$requestMethod][$route] ?? null;
 
-        // If no action is found, use a default 'error' action
+        $exception = new Exception("Internal server error", 500);
+        // If no action is found, throw an "Internal server error"
         if (!$action) {
-            $action = $this->routes['get']['/error'];
+            throw $exception;
         }
 
         // If the action is callable, execute it
@@ -56,7 +63,7 @@ class Router
 
         // If action is not an array, default to the 'error' action
         if (!is_array($action)) {
-            $action = $this->routes['get']['/error'];
+            throw $exception;
         }
 
         // Extract the class and method from the action array
@@ -64,8 +71,7 @@ class Router
 
         // Validate that the class and method exist before invoking them
         if (!class_exists($class) || !method_exists($class, $method)) {
-            $action = $this->routes['get']['/error'];
-            [$class, $method] = $action;
+            throw $exception;
         }
 
         // Create an instance of the class and invoke the method

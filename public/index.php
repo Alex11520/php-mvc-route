@@ -4,6 +4,7 @@
 use App\Controller\BikeController;
 use App\Controller\ErrorController;
 use App\Controller\HomeController;
+use App\Exceptions\ApiException;
 use App\Route\Router;
 
 function myAutoloader($class)
@@ -29,7 +30,6 @@ spl_autoload_register('myAutoloader');
 
 $router = new Router();
 $router->get('/', [HomeController::class, 'get'])
-    ->get('/error', [ErrorController::class, 'get'])
     ->get('/crud/bike/create', [BikeController::class, 'create'])
     ->get('/crud/bike/read', [BikeController::class, 'read'])
     ->get('/crud/bike/update', [BikeController::class, 'update'])
@@ -37,14 +37,19 @@ $router->get('/', [HomeController::class, 'get'])
     ->post('/crud/bike/post', [BikeController::class, 'post'])
     ->get('/crud/bike/get', [BikeController::class, 'get'])
     ->put('/crud/bike/put', [BikeController::class, 'put'])
-    ->delete('/crud/bike/delete',[BikeController::class, 'delete'])
+    ->delete('/crud/bike/delete', [BikeController::class, 'delete'])
     ->get('/crud/bike/display', [BikeController::class, 'display'])
-    ->get('/View/BikePutView', function() {
+    ->get('/View/BikePutView', function () {
         require_once(__DIR__ . '/../App/View/BikePutView.php');
     });
 
-echo $router->resolve($_SERVER['REQUEST_URI'], strtolower($_SERVER['REQUEST_METHOD']));
-
+try {
+    echo $router->resolve($_SERVER['REQUEST_URI'], strtolower($_SERVER['REQUEST_METHOD']));
+} catch (Exception $exception) {
+    http_response_code($exception->getCode());
+    header('Content-Type: text/html; charset=UTF-8');
+    require_once (__DIR__ . "/../App/View/ErrorPage.php");
+}
 ?>
 
 

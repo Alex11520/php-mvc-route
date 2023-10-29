@@ -1,4 +1,3 @@
-
 <div>
     <h2>Change a bike's price</h2>
     <form id="bikeUpdateForm">
@@ -11,6 +10,7 @@
         <button type="submit">submit</button>
     </form>
 </div>
+<div id="error"></div>
 
 <script>
     document.getElementById("bikeUpdateForm").addEventListener("submit", (e) => {
@@ -24,14 +24,23 @@
                 "Content-type": "application/json;charset=UTF-8"
             }
         }).then((r) => {
-            r.json().then((v) => {
-                // display data
-                // document.getElementById("name").innerText = v['bike_name'];
-                // document.getElementById("price").innerText = v['bike_price'];
-                let bikeName = encodeURIComponent(v['bike_name']);
-                let updatedPrice = encodeURIComponent(v['bike_price']);
-                window.location.href = `/View/BikePutView?bike_name=${bikeName}&bike_price=${updatedPrice}`;
-            })
+            if (r.ok) {
+                r.json().then((v) => {
+                    // display data at current page
+                    // document.getElementById("name").innerText = v['bike_name'];
+                    // document.getElementById("price").innerText = v['bike_price'];
+
+                    //redirect to another page to display data
+                    let bikeName = encodeURIComponent(v['bike_name']);
+                    let updatedPrice = encodeURIComponent(v['bike_price']);
+                    window.location.href = `/View/BikePutView?bike_name=${bikeName}&bike_price=${updatedPrice}`;
+                })
+            } else {
+                let errorDiv = document.getElementById("error");
+                r.text().then((v) => {
+                    errorDiv.innerHTML = v;
+                })
+            }
         }).catch((err) => {
             console.error(err)
         })

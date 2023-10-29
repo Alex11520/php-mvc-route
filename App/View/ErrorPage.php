@@ -1,4 +1,5 @@
 <?php
+if (isset($exception))
 echo "<p>";
-echo "Error";
+echo $exception->getMessage();
 echo "</p>";
