@@ -1,4 +1,7 @@
 <?php
+$pageName = "new bike";
+$imgUrl = "https://github.com/Alex11520/img/blob/main/img/bike-1.png?raw=true";
+require_once __DIR__ . '/../htmlcss/HeadNavHeroView.php';
 // Check if the $bike object is set(from the Post function in BikeController)
 if (isset($bike)) {
     // Output a message indicating successful addition of a new bike

@@ -100,6 +100,10 @@ class BikeController
     }
 
 // Define the Put method
+
+    /**
+     * @throws Exception
+     */
     public function Put(): void
     {
         // Retrieve the bike_id and bike_price from the GET request
@@ -147,6 +151,10 @@ class BikeController
 
         // Set the Content-Type to JSON
         header('Content-Type: application/json; charset=utf-8');
+
+        if ($this->db->deleteBike($bike_id)==0){
+            throw new Exception("No bike found", 404);
+        }
 
         // Delete the bike from the database
         $this->db->deleteBike($bike_id);

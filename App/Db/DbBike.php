@@ -86,12 +86,13 @@ class DbBike extends Db
     }
 
     // Function to delete a bike by id
-    public function deleteBike($bike_id): bool
+    public function deleteBike($bike_id): int
     {
         // SQL query to delete bike by id
         $sql = "DELETE FROM bike WHERE bike_id='$bike_id'";
+        $this->conn->query($sql);
         // Execute the query and return the result
-        return $this->conn->query($sql);
+        return $this->conn->affected_rows;
     }
 
     // Function to show all bikes in an HTML table

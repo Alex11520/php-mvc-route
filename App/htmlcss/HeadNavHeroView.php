@@ -6,6 +6,9 @@
     <title><?php echo $pageName; ?></title>
 
     <style>
+        header {
+            position: relative;
+        }
         nav {
             width: 100dvw;
         }
@@ -14,17 +17,29 @@
             display: flex;
             justify-content: space-between;
         }
-        .hero {
-            /*background-image: url(*/<?php //echo $imgUrl; ?>/*);*/
-            background-image: url("https://github.com/Alex11520/img/blob/main/img/bike-1.png?raw=true");
-            background-size: cover;
-            z-index: 10;
-        }
+
         .banner {
             width: 100dvw;
+            position: relative;
         }
         .banner img {
             width: 100%;
+            position: relative;
+        }
+        .hero {
+            position: absolute;
+            top: 100px;
+            left: 800px;
+            z-index: 99;
+            width: 100%;
+            height: 100%;
+        }
+        .hero h1 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            font-size: 120px;
+            color: floralwhite;
         }
 
     </style>
@@ -33,14 +48,14 @@
 <body>
 <header>
     <nav>
-        <div class="nav">
-            <h3>Bikes</h3> <h3>Scooters</h3> <h3>Apparel</h3> <h3>Component</h3> <h3>Service</h3> <h3>Accessory</h3>
-        </div>
+
         <div class="banner">
             <img src="<?php echo $imgUrl; ?>" alt="bike banner">
         </div>
     </nav>
     <div class="hero">
-        <h1><?php $pageName ?></h1>
+        <h1>
+            <?php echo $pageName ?>
+        </h1>
     </div>
 </header>

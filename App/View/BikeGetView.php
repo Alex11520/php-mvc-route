@@ -1,21 +1,19 @@
 <?php
-// Check if the $bike object is set, i.e., if search results are available
+$pageName = "Search result";
+$imgUrl = "https://github.com/Alex11520/img/blob/main/img/bike-1.png?raw=true";
+require_once __DIR__ . '/../htmlcss/HeadNavHeroView.php';
+// Check if the $bike object is set(from the Get function in BikeController)
 if (isset($bike)) {
-    // Start a paragraph tag for formatting
-    echo '<p>';
 
     // Output the heading text for the search result
-    echo 'Search result: ' . PHP_EOL;
+    echo '<p>Search result: <p>';
 
     // Display the Bike ID from the $bike object
-    echo 'Bike Id: ' . $bike->bike_id . PHP_EOL;
+    echo '<p>Bike Id: ' . $bike->bike_id . '</p>';
 
     // Display the Bike Name from the $bike object
-    echo 'Bike Name: ' . $bike->bike_name . PHP_EOL;
+    echo '<p>Bike Name: ' . $bike->bike_name . '</p>';
 
     // Display the Bike Price from the $bike object
-    echo 'Bike Price: ' . $bike->bike_price . PHP_EOL;
-
-    // Close the paragraph tag
-    echo '</p>';
+    echo '<p>Bike Price: ' . $bike->bike_price . '</p>';
 }
